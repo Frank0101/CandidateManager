@@ -1,0 +1,26 @@
+﻿@using CandidateManager.Web.ViewModels
+
+@{
+    Layout = "~/Views/Shared/_AssessmentLayout.cshtml";
+}
+
+@model SessionViewModel
+
+@{
+    const string title = "Assessment Not Available";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+<hr />
+
+<div class="jumbotron">
+    <p>
+        Dear @Html.DisplayFor(model => model.Candidate.FullName),
+    </p>
+    <p>
+        This assessment is only available between
+        @Html.DisplayFor(model => model.AvailableFrom)
+        and @Html.DisplayFor(model => model.AvailableTo).
+    </p>
+</div>

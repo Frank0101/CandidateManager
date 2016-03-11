@@ -1,0 +1,19 @@
+﻿@{
+    const string title = "Dashboard";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+<hr />
+
+<div>
+    <a class="btn btn-primary" title="Candidates" href="@Url.Action("List", "Candidates")">
+        Candidates
+    </a>
+    <a class="btn btn-primary" title="Exercises" href="@Url.Action("List", "Exercises")">
+        Exercises
+    </a>
+    <a class="btn btn-primary" title="Sessions" href="@Url.Action("List", "Sessions")">
+        Sessions
+    </a>
+</div>

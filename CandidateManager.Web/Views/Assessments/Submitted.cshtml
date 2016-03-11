@@ -1,0 +1,25 @@
+﻿@using CandidateManager.Web.ViewModels
+
+@{
+    Layout = "~/Views/Shared/_AssessmentLayout.cshtml";
+}
+
+@model SessionViewModel
+
+@{
+    const string title = "Assessment Submitted";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+<hr />
+
+<div class="jumbotron">
+    <p>
+        Dear @Html.DisplayFor(model => model.Candidate.FullName),
+    </p>
+    <p>
+        This assessment has been submitted at
+        @Html.DisplayFor(model => model.SubmittedAt).
+    </p>
+</div>
