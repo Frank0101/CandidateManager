@@ -1,0 +1,70 @@
+﻿@using CandidateManager.Core.Models
+@using CandidateManager.Web.ViewModels
+
+@{
+    Layout = "~/Views/Shared/_AssessmentLayout.cshtml";
+}
+
+@model SessionViewModel
+
+@{
+    const string title = "Assessment";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+<hr />
+
+<div class="jumbotron">
+    <p>
+        Dear @Html.DisplayFor(model => model.Candidate.FullName),
+    </p>
+
+    @if (Model.Status == SessionStatus.Published)
+    {
+        <p>
+            By clicking the button below you will download the practical test and the assessment will start.
+        </p>
+        <p>
+            You have until the @Html.DisplayFor(model => model.AvailableTo) to start the assessment.
+        </p>
+        <p>
+            <a class="btn btn-primary btn-lg" title="Start" href="@Url.Action("Download", new { id = Model.Id })">
+                Start
+            </a>
+        </p>
+        <br />
+        <p>
+            From the moment you start you will have @Html.DisplayFor(model => model.MaxDuration) hours to finish the
+            assessment.
+        </p>
+    }
+    else if (Model.Status == SessionStatus.Started)
+    {
+        <p>
+            This assessment has already started at @Html.DisplayFor(model => model.StartedAt).
+        </p>
+        <p>
+            However you can still download the practical test by pressing the button below.
+        </p>
+        <p>
+            <a class="btn btn-primary btn-lg" title="Download" href="@Url.Action("Download", new { id = Model.Id })">
+                Download
+            </a>
+        </p>
+        <br />
+        <p>
+            You still have @Html.DisplayFor(model => model.RemainingDurationHours) hours and
+            @Html.DisplayFor(model => model.RemainingDurationMinutes) minutes to finish the assessment.
+        </p>
+    }
+
+    <p>
+        When finished please click on the button below to submit your solution.
+    </p>
+    <p>
+        <a class="btn btn-primary btn-lg" title="Submit" href="@Url.Action("Submit", new { id = Model.Id })">
+            Submit
+        </a>
+    </p>
+</div>

@@ -1,0 +1,50 @@
+﻿@using CandidateManager.Web.Extensions
+@using CandidateManager.Web.ViewModels
+
+@model ExerciseViewModel
+
+@{
+    const string title = "New Exercise";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+<hr />
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.RenderCandidateManagerField(model => model.Name)
+        @Html.RenderCandidateManagerField(model => model.Description)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.File, new
+                {
+                    @class = "form-control",
+                    type = "file",
+                    required = "required"
+                })
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" title="Create" />
+                <a class="btn btn-default" title="Back" href="@Url.Action("List")">
+                    Back
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
